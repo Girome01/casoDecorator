@@ -1,6 +1,6 @@
 package com.mycompany.casodecorator;
 
-public class Sandwich<String> implements iComponent{
+public class Sandwich implements iComponent{
  
     private String proteina;
     private double precio;
