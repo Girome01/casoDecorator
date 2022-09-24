@@ -8,7 +8,7 @@ package com.mycompany.casodecorator;
  *
  * @author Usuario
  */
-public abstract class ComponentDecorator implement iComponent{
+public abstract class ComponentDecorator implements iComponent {
     private iComponent sandwich;
 
     public ComponentDecorator(iComponent sandwich) {

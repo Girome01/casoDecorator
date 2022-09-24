@@ -12,7 +12,7 @@ public class Adicional extends ComponentDecorator{
     private double precio;
     private String descripcion;
 
-    public Adicional(double precio, String descripcion, Object sandwich) {
+    public Adicional(double precio, String descripcion, iComponent sandwich) {
         super(sandwich);
         this.precio = precio;
         this.descripcion = descripcion;

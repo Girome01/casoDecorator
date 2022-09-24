@@ -24,18 +24,6 @@ public class CasoDecorator {
         Sandwich atun30 = getSandwich("Atun 30");
         Sandwich pollo15 = getSandwich("Pollo 15");
         Sandwich pollo30 = getSandwich("Pollo 30");
-       
-       
-
-        Adicional aguacate15 = getAdicional("Aguacate 15");
-        Adicional aguacate30 = getAdicional("Aguacate 30");
-        Adicional dobleProteina15 = getAdicional("Doble proteina 15");
-        Adicional dobleProteina30 = getAdicional("Doble proteina 30");
-        Adicional hongos15 = getAdicional("Hongos 15");
-        Adicional hongos30 = getAdicional("Hongos 30");
-        Adicional refresco = getAdicional("Refresco 15");
-        Adicional sopa = getAdicional("Sopa 15");
-        Adicional postre = getAdicional("Postre 15");
         
     }
     
@@ -73,36 +61,30 @@ public class CasoDecorator {
         return null;
     }
 
-    public static Adicional getAdicional(String nombre){
+    public static Adicional getAdicional(String nombre, iComponent sandwich){
         if(nombre.equals("Aguacate 15"))
-        return new Adicional("Aguacate",1.5,15,"");
+            return new Adicional(1.5, "Aguacate", sandwich);
         if(nombre.equals("Aguacate 30"))
-            return new Adicional("Aguacate",2.5,30,"");
+            return new Adicional(2.5,"Aguacate",sandwich);
 
         if(nombre.equals("Doble proteina 15"))
-            return new Adicional("Doble proteína",4.5,15,"");
+            return new Adicional(4.5,"Doble proteína",sandwich);
         if(nombre.equals("Doble proteina 30"))
-            return new Adicional("Doble proteína",8,30,"");
+            return new Adicional(8,"Doble proteína",sandwich);
 
         if(nombre.equals("Hongos 15"))
-            return new Adicional("Hongos",0.85,15,"");
+            return new Adicional(0.85,"Hongos",sandwich);
         if(nombre.equals("Hongos 30"))
-            return new Adicional("Hongos",1.45,30,"");
+            return new Adicional(1.45,"Hongos",sandwich);
 
-        if(nombre.equals("Refresco 15"))
-            return new Adicional("Refresco",1,15,"");
-        if(nombre.equals("Refresco 30"))
-            return new Adicional("Refresco",1,30,"");
+        if(nombre.equals("Refresco 15") || nombre.equals("Refresco 30"))
+            return new Adicional(1,"Refresco",sandwich);
 
-        if(nombre.equals("Sopa 15"))
-            return new Adicional("Sopa",4.2,15,"");
-        if(nombre.equals("Sopa 30"))
-            return new Adicional("Sopa",4.2,30,"");
+        if(nombre.equals("Sopa 15") || nombre.equals("Sopa 30"))
+            return new Adicional(4.2,"Sopa",sandwich);
 
-        if(nombre.equals("Postre 15"))
-            return new Adicional("Postre",3.5,15,"");
-        if(nombre.equals("Postre 30"))
-            return new Adicional("Postre",3.5,30,"");
+        if(nombre.equals("Postre 15") || nombre.equals("Postre 30"))
+            return new Adicional(3.5,"Postre",sandwich);
 
         return null;
     }
