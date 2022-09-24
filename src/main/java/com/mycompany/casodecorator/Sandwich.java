@@ -1,34 +1,28 @@
 package com.mycompany.casodecorator;
 
-public class Sandwich {
+public class Sandwich<String> implements iComponent{
  
     private String proteina;
     private double precio;
     private int tamanno;
     private String tipo;
 
-    public String getProteina() {
-        return proteina;
-    }
-    public void setProteina(String proteina) {
+    public Sandwich(String proteina, double precio, int tamanno, String tipo) {
         this.proteina = proteina;
-    }
-    public double getPrecio() {
-        return precio;
-    }
-    public void setPrecio(double precio) {
         this.precio = precio;
-    }
-    public int getTamanno() {
-        return tamanno;
-    }
-    public void setTamanno(int tamanno) {
         this.tamanno = tamanno;
-    }
-    public String getTipo() {
-        return tipo;
-    }
-    public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    @Override
+    public double getPrecio() {
+        return this.precio;
+
+        
+    }
+    @Override
+    public String getDescripcion() {
+        String descrString=this.proteina+" de "+this.tamanno+"cm "+"("+this.precio+")";
+        return descrString;
     } 
 }
