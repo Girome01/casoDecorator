@@ -24,5 +24,17 @@ public class Sandwich<String> implements iComponent{
     public String getDescripcion() {
         String descrString=this.proteina+" de "+this.tamanno+"cm "+"("+this.precio+")";
         return descrString;
+    }
+
+    public String getProteina() {
+        return proteina;
+    }
+
+    public int getTamanno() {
+        return tamanno;
+    }
+
+    public String getTipo() {
+        return tipo;
     } 
 }
