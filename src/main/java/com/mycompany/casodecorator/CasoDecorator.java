@@ -1,8 +1,13 @@
+package com.mycompany.casodecorator;
+
+import com.mycompany.casodecorator.Adicional;
+import com.mycompany.casodecorator.Pedido;
+import com.mycompany.casodecorator.Sandwich;
+import com.mycompany.casodecorator.iComponent;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import static java.lang.System.exit;
-
-package com.mycompany.CasoDecorator;
 
 /**
  *
@@ -18,51 +23,21 @@ public class CasoDecorator {
             "4- Salir"
     };
 
-    public void menu() {
-
-        int option = 1;
-
-        System.out.println("Menú Subgüey, por favor escoja alguna opción:");
-
-        while (option != 4) {
-            printMenu(options);
-            try {
-                option = scanner.nextInt();
-                switch (option) {
-                    case 1:
-                        menuSandwiches();
-                        break;
-                    case 2:
-
-                        break;
-                    case 3:
-
-                        break;
-
-                    case 4:
-                        exit(0);
-                }
-            } catch (Exception ex) {
-                System.out.println("Ingrese un numero del 1 al 4" + options.length);
-                scanner.next();
-            }
-        }
-    }
-
-    private int menuSandwiches() {
-        System.out.println("Seleccione un sandwich\n");
-        System.out.println("Sandwiches          Precio 15 CM        Precio 30 CM");
+    public static int menuSandwiches(ArrayList<Sandwich> sandwiches) {
+        System.out.println("Sandwiches          Precio");
         int option = 0;
-        while (option != 0) {
-            //System.out.println("%s     %f      %f", sadwichPavo.name    , sandiwchPavo.precio15cm),     sandwichPavo.precio30cm);
-            //System.out.println("%s     %d      %f", sadwichItaliano.name, sadwichItaliano.precio15cm),  sandwichItaliano.precio30cm);
-            //System.out.println("%s     %d      %f", sadwichBeef.name    , sadwichBeef.precio15cm),      sandwichBeef.precio30cm);
-            //System.out.println("%s     %d      %f", sadwichVeggie.name  , sadwichVeggie.precio15cm),    sandwichVeggie.precio30cm);
-            //System.out.println("%s     %d      %f", sadwichAtun.name    , sadwichAtun.precio15cm),      sandwichAtun.precio30cm);
-            //System.out.println("%s     %d      %f", sadwichPollo.name   , sadwichPollo.precio15cm),     sandwichPollo.precio30cm);
+        
+        while (option < 1 || option > 12) {
+            int count = 1;
+            System.out.println("Seleccione un sandwich\n");
+            for (Sandwich sandwich : sandwiches) {
+                System.out.printf("%d- %s     $%.2f\n", count, sandwich.getDescripcion(), sandwich.getPrecio());
+                count ++;
+            }
+            option = scanner.nextInt();
         }
 
-        return
+        return option-1;
     }
 
     public static void printMenu(String[] options) {
@@ -73,6 +48,9 @@ public class CasoDecorator {
     }
 
     public static void main(String[] args) {
+
+        ArrayList<Sandwich> menu = new ArrayList<>();
+
         Sandwich pavo15 = getSandwich("Pavo 15");
         Sandwich pavo30 = getSandwich("Pavo 30");
         Sandwich italiano15 = getSandwich("Italiano 15");
@@ -85,6 +63,137 @@ public class CasoDecorator {
         Sandwich atun30 = getSandwich("Atun 30");
         Sandwich pollo15 = getSandwich("Pollo 15");
         Sandwich pollo30 = getSandwich("Pollo 30");
+
+        menu.add(pavo15);
+        menu.add(pavo30);
+        menu.add(italiano15);
+        menu.add(italiano30);
+        menu.add(beef15);
+        menu.add(beef30);
+        menu.add(veggie15);
+        menu.add(veggie30);
+        menu.add(atun15);
+        menu.add(atun30);
+        menu.add(pollo15);
+        menu.add(pollo30);
+
+
+        int option = 1;
+
+        System.out.println("Menú Subgüey, por favor escoja su opción:");
+        Pedido pedido = new Pedido();
+        int sandiwchSelection = -1;
+        iComponent component = null;
+
+        while (option != 4) {
+            printMenu(options);
+            try {
+                option = scanner.nextInt();
+                switch (option) {
+                    case 1:
+                        if (component != null) pedido.Orden.add(component);
+                        sandiwchSelection = menuSandwiches(menu);
+                        component = menu.get(sandiwchSelection);
+                        break;
+                    case 2:
+                        int adic = 0;
+                        while(adic != 7) {
+                            if (sandiwchSelection != -1) {
+                                if (menu.get(sandiwchSelection).getTamanno() == 15) {
+                                    System.out.println("1 - Aguacate        - $1.5");
+                                    System.out.println("2 - Doble Proteina  - $4.5");
+                                    System.out.println("3 - Hongos          - $0.85");
+                                    System.out.println("4 - Refresco        - $1");
+                                    System.out.println("5 - Sopa            - $4.2");
+                                    System.out.println("6 - Postre          - $3.5");
+                                    System.out.println("7 - No agregar más  - $0");
+                                    System.out.println("Seleccione el adicional que desea agregar");
+                                    adic = scanner.nextInt();
+                                    switch (adic){
+                                        case 1:
+                                            component = getAdicional("Aguacate 15", component);
+                                            break;
+                                        case 2:
+                                                component = getAdicional("Doble Proteina 15", component);
+                                                break;
+                                        case 3:
+                                                component = getAdicional("Hongos 15", component);
+                                                break;
+                                        case 4:
+                                                component = getAdicional("Refresco 15", component);
+                                                break;
+                                        case 5:
+                                                component = getAdicional("Sopa 15", component);
+                                                break;
+                                        case 6:
+                                                component = getAdicional("Postre 15", component);
+                                                break;
+                                        case 7:
+                                                break;
+                                        default:
+                                            exit(1);
+                                        }
+                                    }
+                                //En caso de que el sandwich sea de 30 cm
+                                else {
+                                    System.out.println("1 - Aguacate        - $2.5");
+                                    System.out.println("2 - Doble Proteina  - $8");
+                                    System.out.println("3 - Hongos          - $1.45");
+                                    System.out.println("4 - Refresco        - $1");
+                                    System.out.println("5 - Sopa            - $4.2");
+                                    System.out.println("6 - Postre          - $3.5");
+                                    System.out.println("7 - No agregar más  - $0");
+                                    System.out.println("Seleccione el adicional que desea agregar");
+                                    adic = scanner.nextInt();
+                                    switch (adic){
+                                        case 1:
+                                            component = getAdicional("Aguacate 30", component);
+                                            break;
+                                        case 2:
+                                            component = getAdicional("Doble Proteina 30", component);
+                                            break;
+                                        case 3:
+                                            component = getAdicional("Hongos 30", component);
+                                            break;
+                                        case 4:
+                                            component = getAdicional("Refresco 30", component);
+                                            break;
+                                        case 5:
+                                            component = getAdicional("Sopa 30", component);
+                                            break;
+                                        case 6:
+                                            component = getAdicional("Postre 30", component);
+                                            break;
+                                        case 7:
+                                            break;
+                                        default:
+                                            exit(1);
+                                    }
+                                }
+
+                            } else {
+                                System.out.println("Por favor seleccione un sandwich antes de agregar adicionales");
+                            }
+                        }
+
+                        break;
+                    case 3:
+                        System.out.println("Por favor indique el nombre del cliente");
+                        pedido.cliente = scanner.next();
+                        if (component != null) pedido.Orden.add(component);
+                        pedido.printPedido();
+                        break;
+
+                    case 4:
+                        exit(1);
+                }
+            } catch (Exception ex) {
+                System.out.println("Ingrese un numero del 1 al 4");
+                scanner.next();
+            }
+        }
+
+
 
     }
 

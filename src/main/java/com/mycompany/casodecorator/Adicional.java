@@ -20,7 +20,7 @@ public class Adicional extends ComponentDecorator{
 
     @Override
     public String getDescripcion() {
-        return getSandwich().getDescripcion().concat(this.descripcion);
+        return getSandwich().getDescripcion().concat(this.descripcion+"     ");
     }
 
     @Override
